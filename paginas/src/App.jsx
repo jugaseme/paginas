@@ -8,7 +8,7 @@ import Cart from "./pages/Cart"
 function App() {
   return (
     <BrowserRouter>
-      <Navbar />
+      <Navbar cartCount={Cart.length} />
 
       <Routes>
         <Route path="/" element={<Home />} />
