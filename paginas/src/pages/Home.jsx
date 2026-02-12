@@ -1,10 +1,19 @@
 import "./Home.css"
 
-function Home() {
+function Home({ products }) {
   return (
-    <div>
-      <h2> Página Inicio</h2>
-      <p>Aquí se mostrarán los productos.</p>
+    <div className="home-container">
+      <h2>Productos</h2>
+
+      <div className="grid">
+        {products.map(product => (
+          <div key={product.id} className="card">
+            <h3>{product.name}</h3>
+            <p>${product.price.toLocaleString("es-CO")}</p>
+            <span>{product.category}</span>
+          </div>
+        ))}
+      </div>
     </div>
   )
 }

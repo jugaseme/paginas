@@ -6,14 +6,17 @@ import Admin from "./pages/Admin"
 import Cart from "./pages/Cart"
 
 function App() {
+
+  const [products, setProducts] = useState([])
+
   return (
     <BrowserRouter>
       <Navbar cartCount={Cart.length} />
 
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/admin" element={<Admin />} />
-        <Route path="/cart" element={<Cart />} />
+        <Route path="/" element={<Home products={products} />} />
+        <Route path="/admin" element={<Admin products={products} setProducts={setProducts} />}  />
+        <Route path="/cart" element={<Cart products={products} />} />
       </Routes>
 
     </BrowserRouter>
