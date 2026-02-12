@@ -1,6 +1,7 @@
 import { useState } from "react"
 
 function Admin({ products, setProducts }) {
+  const [image, setImage] = useState("")
   const [name, setName] = useState("")
   const [price, setPrice] = useState("")
   const [category, setCategory] = useState("")
@@ -21,6 +22,26 @@ function Admin({ products, setProducts }) {
     setPrice("")
     setCategory("")
   }
+
+
+  const handleSubmit = (e) => {
+  e.preventDefault()
+
+  const newProduct = {
+    id: Date.now(),
+    name,
+    price: Number(price),
+    category,
+    image
+  }
+
+  setProducts(prev => [...prev, newProduct])
+
+  setName("")
+  setPrice("")
+  setCategory("")
+  setImage("")
+}
 
   return (
     <div>
@@ -45,6 +66,13 @@ function Admin({ products, setProducts }) {
         placeholder="Categoría"
         value={category}
         onChange={(e) => setCategory(e.target.value)}
+      />
+
+      <input
+        type="text"
+        placeholder="Imagen (URL)"
+        value={image}
+        onChange={(e) => setImage(e.target.value)}
       />
 
       <button onClick={handleAddProduct}>
