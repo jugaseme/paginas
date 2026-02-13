@@ -22,6 +22,18 @@ function Admin({ products, setProducts }) {
     setPrice("")
     setCategory("")
   }
+  const handleImageChange = (e) => {
+  const file = e.target.files[0]
+  if (!file) return
+
+  const reader = new FileReader()
+
+  reader.onloadend = () => {
+    setImage(reader.result)
+  }
+
+  reader.readAsDataURL(file)
+}
 
 
   const handleSubmit = (e) => {
@@ -68,14 +80,24 @@ function Admin({ products, setProducts }) {
         onChange={(e) => setCategory(e.target.value)}
       />
 
-      <input
-        type="text"
-        placeholder="Imagen (URL)"
-        value={image}
-        onChange={(e) => setImage(e.target.value)}
-      />
+<input 
+  type="file" 
+  accept="image/*"
+  onChange={handleImageChange}
+/>
 
-      <button onClick={handleAddProduct}>
+{image && (
+  <div className="preview-container">
+    <p>Vista previa:</p>
+    <img 
+      src={image} 
+      alt="Preview" 
+      className="preview-image"
+    />
+  </div>
+)}
+
+      <button onClick={handleSubmit}>
         Agregar Producto
       </button>
     </div>
