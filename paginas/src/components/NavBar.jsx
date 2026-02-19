@@ -19,5 +19,5 @@ function Navbar({ cartCount }) {
   )
 }
 
-export default Navbar
+export default NavBar
 
