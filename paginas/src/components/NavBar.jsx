@@ -1,7 +1,7 @@
 import { Link } from "react-router-dom"
-import "./Navbar.css"
+import "./NavBar.css"
 
-function Navbar({ cartCount }) {
+function NavBar({ cartCount }) {
   return (
     <nav className="navbar">
       <div className="logo">
