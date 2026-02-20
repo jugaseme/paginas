@@ -20,12 +20,10 @@ function Home({ products, cart, setCart }) {
                   />
             <h3>{product.name}</h3>
             
-
             <p>
               ${product.price.toLocaleString("es-CO")}
             </p>
-
-            <span>{product.category}</span>
+            <h4>{product.category}</h4>
 
             <button onClick={() => addToCart(product)}>
               Agregar al carrito
