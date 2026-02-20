@@ -1,3 +1,5 @@
+import "./Cart.css"
+
 function Cart({ cart, setCart }) {
 
   const removeFromCart = (index) => {

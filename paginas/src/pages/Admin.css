@@ -14,3 +14,24 @@
 .preview-image:hover {
   transform: scale(1.05);
 }
+
+input[type="file"] {
+  margin-top: 20px;
+  padding: 10px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.25s ease;
+}
+
+input[type="file"]:hover {
+  border-color: #f392d6;
+}
+input{
+  margin-top: 20px;
+  padding: 10px;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: border-color 0.25s ease;
+}

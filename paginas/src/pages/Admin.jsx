@@ -1,5 +1,5 @@
 import { useState } from "react"
-
+import "./Admin.css"
 function Admin({ products, setProducts }) {
   const [image, setImage] = useState("")
   const [name, setName] = useState("")
