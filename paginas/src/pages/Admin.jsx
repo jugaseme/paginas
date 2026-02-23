@@ -111,6 +111,7 @@ function Admin({ products, setProducts, deleteProduct }) {
     <button onClick={() => deleteProduct(product.id)}>
       Eliminar
     </button>
+    <button >Editar</button>
   </div>
 ))}
     </div>
