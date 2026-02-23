@@ -9,7 +9,7 @@ function Admin({ products, setProducts, deleteProduct }) {
   const [category, setCategory] = useState("")
   
 
-  const andleAddProduct = () => {
+  const handleAddProduct = () => {
     if (!name || !price || !category) return
 
     const newProduct = {
