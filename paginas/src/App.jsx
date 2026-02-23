@@ -9,7 +9,7 @@ import Cart from "./pages/Cart"
 function App() {
   const [products, setProducts] = useState(() => {
   const stored = localStorage.getItem("products")
-  return stored ? JSON.parse(stored) : [defaultProducts]
+  return stored ? JSON.parse(stored) : []
 })
 
 useEffect(() => {
