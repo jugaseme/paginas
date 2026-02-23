@@ -2,6 +2,11 @@ import "./Home.css"
 import { useState } from "react"
 
 function Home({ cart, setCart }) {
+const [products, setProducts] = useState(() => {
+const stored = localStorage.getItem("products")
+  
+return stored ? JSON.parse(stored) : defaultProducts
+})
    const defaultProducts = [
   {
     id: 1,
@@ -25,11 +30,9 @@ function Home({ cart, setCart }) {
     image: "https://picsum.photos/400?random=3"
   }
 ]
+
   
-const [products, setProducts] = useState(() => {
-  const stored = localStorage.getItem("products")
-  return stored ? JSON.parse(stored) : defaultProducts
-})
+
 
   const addToCart = (product) => {
     setCart(prev => [...prev, product])
@@ -60,9 +63,8 @@ const [products, setProducts] = useState(() => {
             <button onClick={() => addToCart(product)}>
               Agregar al carrito
             </button>
-           <button onClick={() => deleteProduct(product.id)}>
-  Eliminar
-</button>
+
+          
           </div>
         ))}
       </div>

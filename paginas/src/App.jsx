@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { BrowserRouter, Routes, Route } from "react-router-dom"
 
 import Navbar from "./components/NavBar"
@@ -7,33 +7,26 @@ import Admin from "./pages/Admin"
 import Cart from "./pages/Cart"
 
 function App() {
+  const [products, setProducts] = useState(() => {
+  const stored = localStorage.getItem("products")
+  return stored ? JSON.parse(stored) : [defaultProducts]
+})
 
-  const defaultProducts = [
-  {
-    id: 1,
-    name: "Camiseta Negra",
-    price: 80000,
-    category: "Ropa",
-    image: "https://picsum.photos/400?random=1"
-  },
-  {
-    id: 2,
-    name: "Gorra Street",
-    price: 50000,
-    category: "Accesorios",
-    image: "https://picsum.photos/400?random=2"
-  },
-  {
-    id: 3,
-    name: "Chaqueta Oversize",
-    price: 150000,
-    category: "Ropa",
-    image: "https://picsum.photos/400?random=3"
+useEffect(() => {
+  localStorage.setItem("products", JSON.stringify(products))
+}, [products])
+
+
+const deleteProduct = (id) => {
+  const confirmDelete = window.confirm("¿Seguro que quieres eliminar este producto?")
+  
+  if (confirmDelete) {
+    setProducts(prev =>
+      prev.filter(product => product.id !== id)
+    )
   }
-]
-
-  const [products, setProducts] = useState([])
-  const [cart, setCart] = useState([])
+}
+const [cart, setCart] = useState([])
 
   return (
     <BrowserRouter>
@@ -53,14 +46,15 @@ function App() {
 
 
         <Route 
-          path="/admin" 
-          element={
-            <Admin 
-              products={products} 
-              setProducts={setProducts} 
-            />
-          } 
-        />
+  path="/admin" 
+  element={
+    <Admin 
+      products={products} 
+      setProducts={setProducts}
+      deleteProduct={deleteProduct}
+    />
+  } 
+/>
 
         <Route 
           path="/cart" 

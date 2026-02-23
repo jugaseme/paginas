@@ -1,10 +1,13 @@
 import { useState } from "react"
 import "./Admin.css"
-function Admin({ products, setProducts }) {
+
+
+function Admin({ products, setProducts, deleteProduct }) {
   const [image, setImage] = useState("")
   const [name, setName] = useState("")
   const [price, setPrice] = useState("")
   const [category, setCategory] = useState("")
+  
 
   const handleAddProduct = () => {
     if (!name || !price || !category) return
@@ -100,6 +103,16 @@ function Admin({ products, setProducts }) {
       <button onClick={handleSubmit}>
         Agregar Producto
       </button>
+
+{products.map(product => (
+  <div key={product.id}>
+    <h3>{product.name}</h3>
+
+    <button onClick={() => deleteProduct(product.id)}>
+      Eliminar
+    </button>
+  </div>
+))}
     </div>
   )
 }
