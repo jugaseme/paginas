@@ -35,3 +35,13 @@ input{
   cursor: pointer;
   transition: border-color 0.25s ease;
 }
+input:hover {
+  border-color: #f392d6;
+}
+.product-image {
+  width: 150px;
+  height: 150px;
+  object-fit: cover;
+  border-radius: 8px;
+  margin-top: 10px;
+}

@@ -104,10 +104,17 @@ function Admin({ products, setProducts, deleteProduct }) {
         Agregar Producto
       </button>
 
+
+
+  <h1>Productos</h1>
 {products.map(product => (
   <div key={product.id}>
     <h3>{product.name}</h3>
-
+    <p>Precio: ${product.price}</p>
+    <p>Categoría: {product.category}</p>
+     {product.image && (
+      <img src={product.image} alt={product.name} className="product-image" />
+    )}
     <button onClick={() => deleteProduct(product.id)}>
       Eliminar
     </button>
