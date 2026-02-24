@@ -30,7 +30,7 @@ const addToCart = (product) => {
             <h3>{product.name}</h3>
             
             <p>
-              ${product.price.toLocaleString("en-US", {
+              {product.price.toLocaleString("en-US", {
                 style: "currency",
                 currency: "USD",})}
             </p>

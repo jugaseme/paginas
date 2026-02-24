@@ -1,5 +1,27 @@
+body {
+  background-color: #2b4277; /* azul oscuro elegante */
+  color: #4883bb; /* texto claro suave */
+  padding: auto;
+  font-family: 'Inter', sans-serif;
+}
+
+.card {
+  background-color: #1e293b;
+  border-radius: 18px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.3);
+  padding: 20px;
+}
+
+.primary {
+  color: #38bdf8; /* azul acento */
+}
+
+.success {
+  color: #22c55e; /* verde elegante */
+}
+
 .home-container {
-  padding: 40px;
+  padding: 20px;
 }
 
 .grid {
@@ -9,19 +31,7 @@
   margin-top: 30px;
 }
 
-.card {
-  background: var(--card);
-  border-radius: 16px;
-  padding: 16px;
-  box-shadow: 0 8px 20px rgba(0,0,0,0.05);
-  transition: transform 0.25s ease, box-shadow 0.25s ease;
-  cursor: pointer;
-}
 
-.card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 14px 30px rgba(0,0,0,0.1);
-}
 
 .image-container {
   width: 100%;
@@ -42,14 +52,14 @@
 
 .card span {
   font-size: 0.85rem;
-  color: #777;
+  color: #ffffff;
 }
 
 button {
   margin-top: 15px;
   padding: 10px 16px;
-  background: #ffe2f1;
-  color: #f392d6;
+  background: #162058;
+  color: #ebf4ff;
   border: none;
   border-radius: 8px;
   cursor: pointer;
@@ -57,13 +67,13 @@ button {
 }
 
 button:hover {
-  background-color: #f392d6;
+  background-color: #030520;
   color: #fff;
 }
 
 h4 {
   margin-top: 8px;
-  color: #555;
+  color: #ffffff;
   margin-bottom: -5px;
 }
 
