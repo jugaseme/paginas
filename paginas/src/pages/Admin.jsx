@@ -2,50 +2,31 @@ import { useState } from "react"
 import "./Admin.css"
 
 
-function Admin({ products, setProducts, deleteProduct,product}) {
-  const [image, setImage] = useState("")
-  const [name, setName] = useState("")
-  const [price, setPrice] = useState("")
-  const [category, setCategory] = useState("")
-  
-  const [form, setForm] = useState({
-    name: "",
-    price: "",
-    stock: ""
-  })
+function Admin( {products, setProducts, deleteProduct}) {
 
-  const [editingId, setEditingId] = useState(null)
-  
   const handleEdit = (product) => {
   setForm(product)
   setEditingId(product.id)
 }
 
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    category: "",
+    image: ""
+  })
 
-  const handleAddProduct = () => {
-    if (!name || !price || !category) return
+  const [editingId, setEditingId] = useState(null)
+  
 
-    const newProduct = {
-      id: Date.now(),
-      name,
-      price: Number(price),
-      category
-    }
-
-    setProducts(prev => [...prev, newProduct])
-
-    setName("")
-    setPrice("")
-    setCategory("")
-  }
-  const handleImageChange = (e) => {
+const handleImageChange = (e) => {
   const file = e.target.files[0]
   if (!file) return
 
   const reader = new FileReader()
 
   reader.onloadend = () => {
-    setImage(reader.result)
+    setForm({...form, image: reader.result})
   }
 
   reader.readAsDataURL(file)
@@ -78,33 +59,34 @@ const handleSubmit = (e) => {
   setForm({
     name: "",
     price: "",
-    stock: ""
+    category: "",
+    image: ""
   })
 }
 
   return (
     <div>
       <h2>Panel Admin</h2>
-
+<form onSubmit={handleSubmit}>
       <input
         type="text"
         placeholder="Nombre"
-        value={name}
-        onChange={(e) => setName(e.target.value)}
+        value={form.name}
+        onChange={(e) => setForm({...form, name: e.target.value})}
       />
 
       <input
         type="number"
         placeholder="Precio"
-        value={price}
-        onChange={(e) => setPrice(e.target.value)}
+        value={form.price}
+        onChange={(e) => setForm({...form, price: e.target.value})}
       />
 
       <input
         type="text"
         placeholder="Categoría"
-        value={category}
-        onChange={(e) => setCategory(e.target.value)}
+        value={form.category}
+        onChange={(e) => setForm({...form, category: e.target.value})}
       />
 
 <input 
@@ -113,11 +95,11 @@ const handleSubmit = (e) => {
   onChange={handleImageChange}
 />
 
-{image && (
+{form.image && (
   <div className="preview-container">
     <p>Vista previa:</p>
     <img 
-      src={image} 
+      src={form.image} 
       alt="Preview" 
       className="preview-image"
     />
@@ -126,10 +108,11 @@ const handleSubmit = (e) => {
 
 
 <button type="submit" >{editingId ? "Actualizar Producto" : "Agregar Producto"}</button>
-
+</form>
 
 
   <h1>Productos</h1>
+
 {products.map(product => (
   <div key={product.id}>
     <h3>{product.name}</h3>
@@ -144,6 +127,7 @@ const handleSubmit = (e) => {
     <button onClick={() => handleEdit(product)}>Editar</button>
   </div>
 ))}
+
     </div>
   )
 }

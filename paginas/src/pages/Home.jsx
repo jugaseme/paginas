@@ -8,9 +8,9 @@ const [products, setProducts] = useState(() => {
   return stored ? JSON.parse(stored) : []
 })
 
-  const addToCart = (product) => {
-    setCart(prev => [...prev, product])
-  }
+const addToCart = (product) => {
+  setCart(prev => [...prev, product])
+}
   const deleteProduct = (id) => {
   setProducts(products.filter(product => product.id !== id))
 }

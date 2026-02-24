@@ -26,6 +26,7 @@ const deleteProduct = (id) => {
     )
   }
 }
+
 const [cart, setCart] = useState([])
 
   return (
@@ -52,7 +53,6 @@ const [cart, setCart] = useState([])
       products={products} 
       setProducts={setProducts}
       deleteProduct={deleteProduct}
-      
     />
   } 
 />
