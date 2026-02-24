@@ -4,6 +4,14 @@ import "./Admin.css"
 
 function Admin( {products, setProducts, deleteProduct}) {
 
+  const formatCurrency = (value, currency = "USD") => {
+  return new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency
+  }).format(value)
+}
+
+
   const handleEdit = (product) => {
   setForm(product)
   setEditingId(product.id)
@@ -15,6 +23,12 @@ function Admin( {products, setProducts, deleteProduct}) {
     category: "",
     image: ""
   })
+  const totalProducts = products.length
+
+const totalValue = products.reduce(
+  (acc, product) => acc + Number(product.price || 0),
+  0
+)
 
   const [editingId, setEditingId] = useState(null)
   
@@ -41,7 +55,8 @@ const handleSubmit = (e) => {
   if (editingId) {
     // ACTUALIZAR
     const updatedProducts = products.map((p) =>
-      p.id === editingId ? form : p
+      p.id === editingId ? { ...form, price: Number(form.price) }
+  : p
     )
 
     setProducts(updatedProducts)
@@ -50,7 +65,8 @@ const handleSubmit = (e) => {
     // AGREGAR
     const newProduct = {
       ...form,
-      id: Date.now()
+      id: Date.now(),
+      price: Number(form.price)
     }
 
     setProducts([...products, newProduct])
@@ -112,11 +128,22 @@ const handleSubmit = (e) => {
 
 
   <h1>Productos</h1>
+  {totalProducts === 0 ? (
+    <p>No hay productos disponibles.</p>
+  ) : (
+    <p>Total de productos: {totalProducts}</p>
+  )}
+  {totalValue > 0 && (
+    <p>Valor total del inventario: ${totalValue.toLocaleString("en-US", {
+      style: "currency",
+      currency: "USD"
+    })} USD</p>
+  )}  
 
 {products.map(product => (
   <div key={product.id}>
     <h3>{product.name}</h3>
-    <p>Precio: ${product.price}</p>
+    <p>Precio: {formatCurrency(product.price)} USD</p>
     <p>Categoría: {product.category}</p>
      {product.image && (
       <img src={product.image} alt={product.name} className="product-image" />

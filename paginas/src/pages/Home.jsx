@@ -30,10 +30,11 @@ const addToCart = (product) => {
             <h3>{product.name}</h3>
             
             <p>
-              ${product.price.toLocaleString("es-CO")}
+              ${product.price.toLocaleString("en-US", {
+                style: "currency",
+                currency: "USD",})}
             </p>
             <h4>{product.category}</h4>
-
             <button onClick={() => addToCart(product)}>
               Agregar al carrito
             </button>
