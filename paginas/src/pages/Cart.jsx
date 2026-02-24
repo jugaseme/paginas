@@ -20,6 +20,7 @@ function Cart({ cart, setCart }) {
       {cart.map((item, index) => (
         <div key={index}>
           {item.name} - ${item.price.toLocaleString("es-CO")}
+          <img  src={item.image} alt={item.name} />
           <button onClick={() => removeFromCart(index)}>
             Eliminar
           </button>

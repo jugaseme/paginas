@@ -2,12 +2,25 @@ import { useState } from "react"
 import "./Admin.css"
 
 
-function Admin({ products, setProducts, deleteProduct }) {
+function Admin({ products, setProducts, deleteProduct,product}) {
   const [image, setImage] = useState("")
   const [name, setName] = useState("")
   const [price, setPrice] = useState("")
   const [category, setCategory] = useState("")
   
+  const [form, setForm] = useState({
+    name: "",
+    price: "",
+    stock: ""
+  })
+
+  const [editingId, setEditingId] = useState(null)
+  
+  const handleEdit = (product) => {
+  setForm(product)
+  setEditingId(product.id)
+}
+
 
   const handleAddProduct = () => {
     if (!name || !price || !category) return
@@ -39,23 +52,34 @@ function Admin({ products, setProducts, deleteProduct }) {
 }
 
 
-  const handleSubmit = (e) => {
+const handleSubmit = (e) => {
   e.preventDefault()
 
-  const newProduct = {
-    id: Date.now(),
-    name,
-    price: Number(price),
-    category,
-    image
+  if (!form.name.trim()) return
+
+  if (editingId) {
+    // ACTUALIZAR
+    const updatedProducts = products.map((p) =>
+      p.id === editingId ? form : p
+    )
+
+    setProducts(updatedProducts)
+    setEditingId(null)
+  } else {
+    // AGREGAR
+    const newProduct = {
+      ...form,
+      id: Date.now()
+    }
+
+    setProducts([...products, newProduct])
   }
 
-  setProducts(prev => [...prev, newProduct])
-
-  setName("")
-  setPrice("")
-  setCategory("")
-  setImage("")
+  setForm({
+    name: "",
+    price: "",
+    stock: ""
+  })
 }
 
   return (
@@ -100,9 +124,8 @@ function Admin({ products, setProducts, deleteProduct }) {
   </div>
 )}
 
-      <button onClick={handleSubmit}>
-        Agregar Producto
-      </button>
+
+<button type="submit" >{editingId ? "Actualizar Producto" : "Agregar Producto"}</button>
 
 
 
@@ -118,7 +141,7 @@ function Admin({ products, setProducts, deleteProduct }) {
     <button onClick={() => deleteProduct(product.id)}>
       Eliminar
     </button>
-    <button >Editar</button>
+    <button onClick={() => handleEdit(product)}>Editar</button>
   </div>
 ))}
     </div>

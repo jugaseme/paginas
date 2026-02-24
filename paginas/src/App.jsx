@@ -52,6 +52,7 @@ const [cart, setCart] = useState([])
       products={products} 
       setProducts={setProducts}
       deleteProduct={deleteProduct}
+      
     />
   } 
 />
