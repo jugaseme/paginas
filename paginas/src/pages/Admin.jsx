@@ -1,8 +1,15 @@
 import { useState } from "react"
 import "./Admin.css"
-
+import { useEffect } from "react"
 
 function Admin( {products, setProducts, deleteProduct}) {
+
+  useEffect(() => {
+  fetch("http://localhost:3001/products")
+    .then(res => res.json())
+    .then(data => setProducts(data))
+    .catch(err => console.error("Error cargando productos:", err))
+}, [])
 
   const formatCurrency = (value, currency = "USD") => {
   return new Intl.NumberFormat("en-US", {
@@ -47,7 +54,7 @@ const handleImageChange = (e) => {
 }
 
 
-const handleSubmit = (e) => {
+const handleSubmit = async (e) => {
   e.preventDefault()
 
   if (!form.name.trim()) return
@@ -69,7 +76,17 @@ const handleSubmit = (e) => {
       price: Number(form.price)
     }
 
-    setProducts([...products, newProduct])
+    await fetch("http://localhost:3001/products", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json"
+  },
+  body: JSON.stringify(form)
+})
+
+const res = await fetch("http://localhost:3001/products")
+const data = await res.json()
+setProducts(data)
   }
 
   setForm({

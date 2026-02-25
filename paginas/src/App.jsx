@@ -17,6 +17,10 @@ useEffect(() => {
 }, [products])
 
 
+
+
+
+
 const deleteProduct = (id) => {
   const confirmDelete = window.confirm("¿Seguro que quieres eliminar este producto?")
   
