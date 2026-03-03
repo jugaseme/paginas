@@ -68,6 +68,9 @@ const handleSubmit = async (e) => {
 
     setProducts(updatedProducts)
     setEditingId(null)
+    await fetch(`http://localhost:3001/products/${id}`, {
+  method: "DELETE"
+})
   } else {
     // AGREGAR
     const newProduct = {

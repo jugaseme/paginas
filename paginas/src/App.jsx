@@ -21,13 +21,16 @@ useEffect(() => {
 
 
 
-const deleteProduct = (id) => {
+const deleteProduct = async (id) => {
   const confirmDelete = window.confirm("¿Seguro que quieres eliminar este producto?")
   
   if (confirmDelete) {
     setProducts(prev =>
       prev.filter(product => product.id !== id)
     )
+    await fetch(`http://localhost:3001/products/${id}`, {
+  method: "DELETE"
+})
   }
 }
 
